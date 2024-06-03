@@ -59,9 +59,13 @@ export const MonacoEditor = () => {
     const uuid = location.pathname.substring(1);
     if (uuid.length === 0) return;
     setCodeId(uuid);
-    setShareDisabled(true);
     snippetService.findSnippet(uuid).then((data) => {
-      data && setCode(data.snippet);
+      if (!data) {
+        history.pushState({}, "", "/");
+        return;
+      }
+      setCode(data.snippet);
+      setShareDisabled(true);
     });
   }, []);
 
