@@ -26,7 +26,7 @@ const DEVAULT_CONTENT = `<html>
 </html>`;
 
 export const MonacoEditor = () => {
-  const [theme, setTheme] = useState<Theme>("vs-dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [language, setLanguage] = useState<Language>("html");
   const [codeId, setCodeId] = useState<string>("");
   const [code, setCode] = useState<string>(DEVAULT_CONTENT);
