@@ -1,5 +1,11 @@
+import { MainBackground } from "@/layouts";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <MainBackground>
+      <p>EdiedRamos</p>
+    </MainBackground>
+  );
 };
 
 export default App;
