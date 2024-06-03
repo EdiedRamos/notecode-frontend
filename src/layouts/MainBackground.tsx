@@ -6,10 +6,10 @@ interface Props {
 
 export const MainBackground = ({ children }: Props) => {
   return (
-    <div className="relative bg-purple-500 min-h-[100vh]">
+    <div className="relative bg-violet-500 min-h-[100vh]">
       <div className="select-none h-[700px]">
         <img
-          className="bg-purple-500 object-cover object-bottom w-full h-full"
+          className="bg-violet-500 object-cover object-bottom w-full h-full"
           src={HeroBackground}
         />
       </div>
