@@ -3,6 +3,7 @@ import { EditorLanguages } from "./EditorLanguages";
 import { EditorTheme } from "./EditorTheme";
 import { Language, type Theme } from "@/types";
 import { useState } from "react";
+import { LinkIcon, ShareIcon } from "@/assets";
 
 const DEVAULT_CONTENT = `<html>
   <head>
@@ -48,9 +49,21 @@ export const MonacoEditor = () => {
         language={language}
         defaultValue={DEVAULT_CONTENT}
       />
-      <div className="mt-3 flex gap-3">
-        <EditorLanguages handleLanguage={handleLanguage} />
-        <EditorTheme handleTheme={handleTheme} />
+      <div className="mt-3 flex flex-wrap justify-between">
+        <div className="flex gap-3">
+          <EditorLanguages handleLanguage={handleLanguage} />
+          <EditorTheme handleTheme={handleTheme} />
+        </div>
+        <div className="flex gap-5">
+          <button className="flex items-center gap-2">
+            <LinkIcon />
+            <p className="text-gray-500">.../2NZNOWELPo</p>
+          </button>
+          <button className="p-2 flex flex-wrap items-center gap-3 bg-blue-500 text-white rounded-xl disabled:bg-gray-500">
+            <ShareIcon />
+            Share
+          </button>
+        </div>
       </div>
     </div>
   );
