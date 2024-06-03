@@ -1,2 +1,2 @@
 export * from "./Content";
-export * from "./MonacoEditor";
+export * from "./Editor";

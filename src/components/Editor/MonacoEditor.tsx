@@ -1,4 +1,7 @@
 import { Editor } from "@monaco-editor/react";
+import { EditorLanguages } from "./EditorLanguages";
+import { EditorTheme } from "./EditorTheme";
+import { Language, type Theme } from "@/types";
 import { useState } from "react";
 
 const DEVAULT_CONTENT = `<html>
@@ -21,7 +24,16 @@ const DEVAULT_CONTENT = `<html>
 </html>`;
 
 export const MonacoEditor = () => {
-  const [theme, setTheme] = useState<"light" | "vs-dark">("vs-dark");
+  const [theme, setTheme] = useState<Theme>("vs-dark");
+  const [language, setLanguage] = useState<Language>("html");
+
+  const handleTheme = (newTheme: Theme) => {
+    setTheme(newTheme);
+  };
+
+  const handleLanguage = (newLanguage: Language) => {
+    setLanguage(newLanguage);
+  };
 
   return (
     <div
@@ -31,22 +43,14 @@ export const MonacoEditor = () => {
     >
       <Editor
         theme={theme}
-        height={"100vh"}
+        height={"720px"}
         width={"100%"}
-        defaultLanguage="html"
+        language={language}
         defaultValue={DEVAULT_CONTENT}
       />
-      <div className="mt-3">
-        <select
-          className="p-2 outline-none focus:ring-2 focus:ring-blue-500 bg-slate-500 text-white rounded-lg"
-          name="theme"
-          onChange={(info) => {
-            setTheme(info.target.value === "light" ? "light" : "vs-dark");
-          }}
-        >
-          <option value="dark">Dark</option>
-          <option value="light">Light</option>
-        </select>
+      <div className="mt-3 flex gap-3">
+        <EditorLanguages handleLanguage={handleLanguage} />
+        <EditorTheme handleTheme={handleTheme} />
       </div>
     </div>
   );
