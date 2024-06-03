@@ -20,12 +20,13 @@ export const EditorTheme = ({ handleTheme, theme }: Props) => {
     <select
       className="p-2 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-500 text-white rounded-lg"
       name="theme"
+      value={theme}
       onChange={(info) => {
         handleTheme(info.target.value === "light" ? "light" : "vs-dark");
       }}
     >
       {options.map(({ value, content }) => (
-        <option selected={value === theme} key={value} value={value}>
+        <option key={value} value={value}>
           {content}
         </option>
       ))}
