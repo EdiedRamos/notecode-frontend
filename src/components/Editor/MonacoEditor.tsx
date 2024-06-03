@@ -58,15 +58,21 @@ export const MonacoEditor = () => {
     setShareDisabled(false);
   };
 
+  const handleCopy = () => {
+    const { href } = location;
+    // TODO Add some alert for this
+    navigator.clipboard.writeText(href);
+  };
+
   useEffect(() => {
     const uuid = location.pathname.substring(1);
     if (uuid.length === 0) return;
-    setCodeId(uuid);
     snippetService.findSnippet(uuid).then((data) => {
       if (!data) {
         history.pushState({}, "", "/");
         return;
       }
+      setCodeId(data.snippetId);
       setCode(data.snippet);
       if (isLanguage(data.language)) {
         setLanguage(data.language);
@@ -107,7 +113,7 @@ export const MonacoEditor = () => {
         </div>
         <div className="flex flex-wrap gap-5 w-full md:w-auto justify-center">
           {codeId.length > 0 && (
-            <button className="flex items-center gap-2">
+            <button className="flex items-center gap-2" onClick={handleCopy}>
               <LinkIcon />
               <p className="text-gray-500">.../{codeId.substring(0, 10)}</p>
             </button>
