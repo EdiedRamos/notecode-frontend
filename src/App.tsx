@@ -1,9 +1,10 @@
+import { Content } from "./components";
 import { MainBackground } from "@/layouts";
 
 const App = () => {
   return (
     <MainBackground>
-      <p>EdiedRamos</p>
+      <Content />
     </MainBackground>
   );
 };

@@ -14,7 +14,7 @@ export const MainBackground = ({ children }: Props) => {
         />
       </div>
       {children && (
-        <div className="absolute left-[50%] -translate-x-[50%] top-10">
+        <div className="absolute left-[50%] -translate-x-[50%] top-10 w-full">
           {children}
         </div>
       )}
