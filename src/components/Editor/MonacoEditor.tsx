@@ -4,6 +4,7 @@ import { EditorTheme } from "./EditorTheme";
 import { Language, type Theme } from "@/types";
 import { useEffect, useState } from "react";
 import { LinkIcon, ShareIcon } from "@/assets";
+import { snippetService } from "@/services/snippets.service";
 
 const DEVAULT_CONTENT = `<html>
   <head>
@@ -40,12 +41,12 @@ export const MonacoEditor = () => {
   };
 
   const handleShare = () => {
-    const uuid = crypto.randomUUID();
-    history.pushState({}, "", `/${uuid}`);
-    setCodeId(uuid);
-    setShareDisabled(true);
-    // TODO MAKE POST REQUEST
-    localStorage.setItem("code", code);
+    snippetService.saveSnippet(code).then((snippetId) => {
+      if (!snippetId) return;
+      history.pushState({}, "", `/${snippetId}`);
+      setCodeId(snippetId);
+      setShareDisabled(true);
+    });
   };
 
   const handleChange = (code: string | undefined) => {
@@ -59,9 +60,9 @@ export const MonacoEditor = () => {
     if (uuid.length === 0) return;
     setCodeId(uuid);
     setShareDisabled(true);
-    // TODO MAKE GET REQUEST
-    const codeSaved = localStorage.getItem("code");
-    codeSaved && setCode(codeSaved);
+    snippetService.findSnippet(uuid).then((data) => {
+      data && setCode(data.snippet);
+    });
   }, []);
 
   return (
