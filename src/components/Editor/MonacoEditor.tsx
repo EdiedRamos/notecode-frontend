@@ -91,7 +91,7 @@ export const MonacoEditor = () => {
 
   return (
     <div
-      className={`w-[90vw] lg:w-[880px] p-4 rounded-xl ${
+      className={`w-[90vw] lg:w-[880px] p-4 rounded-xl shadow-2xl ${
         theme === "light" ? "bg-white" : "bg-[#1e1e1e]"
       }`}
     >
