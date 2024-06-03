@@ -49,12 +49,12 @@ export const MonacoEditor = () => {
         language={language}
         defaultValue={DEVAULT_CONTENT}
       />
-      <div className="mt-3 flex flex-wrap justify-between">
-        <div className="flex gap-3">
+      <div className="mt-3 flex flex-wrap gap-3 justify-between">
+        <div className="flex flex-wrap gap-3 w-full md:w-auto justify-center">
           <EditorLanguages handleLanguage={handleLanguage} />
           <EditorTheme handleTheme={handleTheme} />
         </div>
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-5 w-full md:w-auto justify-center">
           <button className="flex items-center gap-2">
             <LinkIcon />
             <p className="text-gray-500">.../2NZNOWELPo</p>
