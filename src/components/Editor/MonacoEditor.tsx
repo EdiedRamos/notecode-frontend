@@ -1,7 +1,7 @@
 import { Editor } from "@monaco-editor/react";
 import { EditorLanguages } from "./EditorLanguages";
 import { EditorTheme } from "./EditorTheme";
-import { Language, isLanguage, type Theme } from "@/types";
+import { Language, isLanguage, isTheme, type Theme } from "@/types";
 import { useEffect, useState } from "react";
 import { LinkIcon, ShareIcon } from "@/assets";
 import { snippetService } from "@/services/snippets.service";
@@ -34,6 +34,7 @@ export const MonacoEditor = () => {
 
   const handleTheme = (newTheme: Theme) => {
     setTheme(newTheme);
+    localStorage.setItem("editorTheme", newTheme);
   };
 
   const handleLanguage = (newLanguage: Language) => {
@@ -74,6 +75,14 @@ export const MonacoEditor = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("editorTheme");
+    if (!savedTheme) return;
+    if (isTheme(savedTheme)) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
   return (
     <div
       className={`w-[90vw] lg:w-[880px] p-4 rounded-xl ${
@@ -94,7 +103,7 @@ export const MonacoEditor = () => {
             language={language}
             handleLanguage={handleLanguage}
           />
-          <EditorTheme handleTheme={handleTheme} />
+          <EditorTheme handleTheme={handleTheme} theme={theme} />
         </div>
         <div className="flex flex-wrap gap-5 w-full md:w-auto justify-center">
           {codeId.length > 0 && (
