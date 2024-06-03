@@ -20,7 +20,7 @@ const options: Options[] = [
 export const EditorLanguages = ({ handleLanguage }: Props) => {
   return (
     <select
-      className="p-2 outline-none focus:ring-2 focus:ring-blue-500 bg-slate-500 text-white rounded-lg"
+      className="p-2 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-500 text-white rounded-lg"
       name="theme"
       onChange={(info) => {
         const { value } = info.target;

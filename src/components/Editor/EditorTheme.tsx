@@ -17,7 +17,7 @@ const options: Options[] = [
 export const EditorTheme = ({ handleTheme }: Props) => {
   return (
     <select
-      className="p-2 outline-none focus:ring-2 focus:ring-blue-500 bg-slate-500 text-white rounded-lg"
+      className="p-2 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-500 text-white rounded-lg"
       name="theme"
       onChange={(info) => {
         handleTheme(info.target.value === "light" ? "light" : "vs-dark");
