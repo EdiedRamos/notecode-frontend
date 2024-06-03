@@ -1,6 +1,7 @@
 export interface Snippet {
   snippetId: string;
   snippet: string;
+  language: string;
 }
 
 export interface SnippetGet {

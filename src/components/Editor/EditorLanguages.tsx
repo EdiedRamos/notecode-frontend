@@ -2,6 +2,7 @@ import { isLanguage, type Language } from "@/types";
 
 interface Props {
   handleLanguage: (newLanguage: Language) => void;
+  language: string;
 }
 
 interface Options {
@@ -17,7 +18,7 @@ const options: Options[] = [
   { value: "json", content: "Json" },
 ];
 
-export const EditorLanguages = ({ handleLanguage }: Props) => {
+export const EditorLanguages = ({ handleLanguage, language }: Props) => {
   return (
     <select
       className="p-2 outline-none focus:ring-2 focus:ring-blue-500 bg-gray-500 text-white rounded-lg"
@@ -29,7 +30,7 @@ export const EditorLanguages = ({ handleLanguage }: Props) => {
       }}
     >
       {options.map(({ value, content }) => (
-        <option key={value} value={value}>
+        <option selected={value === language} key={value} value={value}>
           {content}
         </option>
       ))}

@@ -10,9 +10,11 @@ class SnippetService {
       .catch(() => null);
   }
 
-  public async saveSnippet(snippet: string): Promise<string | null> {
+  public async saveSnippet(
+    snippet: Omit<Snippet, "snippetId">
+  ): Promise<string | null> {
     return baseAxios
-      .post<SnippetPost>("snippet", { snippet })
+      .post<SnippetPost>("snippet", snippet)
       .then((res) => res.data.snippetId)
       .catch(() => null);
   }

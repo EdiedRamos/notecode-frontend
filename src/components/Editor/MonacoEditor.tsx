@@ -1,7 +1,7 @@
 import { Editor } from "@monaco-editor/react";
 import { EditorLanguages } from "./EditorLanguages";
 import { EditorTheme } from "./EditorTheme";
-import { Language, type Theme } from "@/types";
+import { Language, isLanguage, type Theme } from "@/types";
 import { useEffect, useState } from "react";
 import { LinkIcon, ShareIcon } from "@/assets";
 import { snippetService } from "@/services/snippets.service";
@@ -41,12 +41,14 @@ export const MonacoEditor = () => {
   };
 
   const handleShare = () => {
-    snippetService.saveSnippet(code).then((snippetId) => {
-      if (!snippetId) return;
-      history.pushState({}, "", `/${snippetId}`);
-      setCodeId(snippetId);
-      setShareDisabled(true);
-    });
+    snippetService
+      .saveSnippet({ snippet: code, language })
+      .then((snippetId) => {
+        if (!snippetId) return;
+        history.pushState({}, "", `/${snippetId}`);
+        setCodeId(snippetId);
+        setShareDisabled(true);
+      });
   };
 
   const handleChange = (code: string | undefined) => {
@@ -65,6 +67,9 @@ export const MonacoEditor = () => {
         return;
       }
       setCode(data.snippet);
+      if (isLanguage(data.language)) {
+        setLanguage(data.language);
+      }
       setShareDisabled(true);
     });
   }, []);
@@ -85,7 +90,10 @@ export const MonacoEditor = () => {
       />
       <div className="mt-3 flex flex-wrap gap-3 justify-between">
         <div className="flex flex-wrap gap-3 w-full md:w-auto justify-center">
-          <EditorLanguages handleLanguage={handleLanguage} />
+          <EditorLanguages
+            language={language}
+            handleLanguage={handleLanguage}
+          />
           <EditorTheme handleTheme={handleTheme} />
         </div>
         <div className="flex flex-wrap gap-5 w-full md:w-auto justify-center">
