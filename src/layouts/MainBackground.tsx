@@ -1,4 +1,7 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import { HeroBackground } from "@/assets";
+import { ToastContainer } from "react-toastify";
 
 interface Props {
   children?: React.ReactNode;
@@ -18,6 +21,7 @@ export const MainBackground = ({ children }: Props) => {
           {children}
         </div>
       )}
+      <ToastContainer theme="dark" position="bottom-left" />
     </div>
   );
 };

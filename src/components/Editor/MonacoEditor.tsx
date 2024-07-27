@@ -5,6 +5,7 @@ import { Language, isLanguage, isTheme, type Theme } from "@/types";
 import { useEffect, useState } from "react";
 import { LinkIcon, ShareIcon } from "@/assets";
 import { snippetService } from "@/services/snippets.service";
+import { toast } from "react-toastify";
 
 const DEVAULT_CONTENT = `<html>
   <head>
@@ -42,9 +43,13 @@ export const MonacoEditor = () => {
   };
 
   const handleShare = () => {
+    const alertMessageId = setTimeout(() => {
+      toast("Please wait, the service is turning on! 😅");
+    }, 5000);
     snippetService
       .saveSnippet({ snippet: code, language })
       .then((snippetId) => {
+        clearInterval(alertMessageId);
         if (!snippetId) return;
         history.pushState({}, "", `/${snippetId}`);
         setCodeId(snippetId);
@@ -60,8 +65,9 @@ export const MonacoEditor = () => {
 
   const handleCopy = () => {
     const { href } = location;
-    // TODO Add some alert for this
-    navigator.clipboard.writeText(href);
+    navigator.clipboard
+      .writeText(href)
+      .then(() => toast.success("Snipped copied!"));
   };
 
   useEffect(() => {
